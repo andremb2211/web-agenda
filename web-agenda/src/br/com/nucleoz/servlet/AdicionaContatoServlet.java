@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import conectabanco.Contato;
+import br.com.nucleoz.dao.ContatoDao;
+import br.com.nucleoz.entidades.Contato;
 
 @WebServlet("/adicionaContato")
 public class AdicionaContatoServlet extends HttpServlet {
@@ -53,16 +54,19 @@ public class AdicionaContatoServlet extends HttpServlet {
 
 		//Cria o objeto contato
 		Contato contato = new Contato(nome, email, endereco, dataNascimento);
-
+        ContatoDao contatoDao = new ContatoDao();
+        
+        contatoDao.adicionaContato(contato);
+        
 		
 		//Mostra na tela 
 		out.println("<html>");
 		out.println("<body>");
 		out.println("<p>");
-		out.println(nome);
-		out.println(email);
-		out.println(endereco);
-		out.println(dataNascimento);
+		out.println("Contato"+contato.getNome()+"Adicionado!");
+		/*out.println(contato.getEmail());
+		out.println(contato.getEndereco());
+		out.println(contato.getDataNascimento());*/
 		out.println("</p>");
 		out.println("</body>");
 		out.println("</html>");
